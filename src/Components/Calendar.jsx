@@ -1,0 +1,361 @@
+import React, { useState, useEffect } from "react";
+import {
+  Typography,
+  Button,
+  Box,
+  Paper,
+  Grid,
+  Link,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  Popover ,
+} from "@mui/material";
+
+import { useNavigate } from "react-router-dom";
+import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
+import FullCalendar from "@fullcalendar/react"; // must go before plugins
+import dayGridPlugin from "@fullcalendar/daygrid"; // a plugin!
+import timeGridPlugin from "@fullcalendar/timegrid";
+import listPlugin from "@fullcalendar/list";
+import interactionPlugin from "@fullcalendar/interaction";
+import CloseIcon from "@mui/icons-material/Close";
+import MessageIcon from "@mui/icons-material/Message";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import Footer from "./Navbar/Footer";
+import moment from "moment";
+
+import { decode as atob, encode as btoa } from "base-64";
+import Loginnav from "./Navbar/Loginnav";
+import "./calender.css";
+import axios from "axios";
+
+const Calendar = () => {
+  const [user, setUser] = useState("");
+  const [enrol_id, setEnrol_id] = useState("");
+  const [category, setCategory] = useState("");
+  const [newevent, setEvents] = useState("");
+  const [open, setOpen] = useState(false);
+  const [modalTitle, setModalTitle] = useState();
+  const [description, setDescription] = useState();
+  const [startdate, setDtartdate] = useState();
+  const [starttime, setTime] = useState();
+  const [endtime, setTimeend] = useState();
+  const [status, setStatus] = useState();
+  const [urls, setUrls] = useState();
+  const [today, setToday] = useState();
+  const [mylink, setMylink] = useState();
+  const [curtimeseconds, setCs] = useState();
+  const [eventdate, setEd] = useState();
+  const [starttimeseconds, setSts] = useState();
+  const [endtimeseconds, setEts] = useState();
+  let navigate = useNavigate();
+  const options = {
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Content-Type": "application/json",
+    },
+  };
+  const sendData = {
+    enrol_id: localStorage.getItem("enrol_id"),
+  };
+  useEffect(() => {
+    // console.log(auth)
+    var user_id = localStorage.getItem("user_id");
+    var enrol_id = localStorage.getItem("enrol_id");
+    var category = localStorage.getItem("category");
+    setUser(user_id);
+    setEnrol_id(enrol_id);
+    setCategory(category);
+    axios
+      .post(
+        "http://localhost:50003/calendar/fetchevents",
+        JSON.stringify(sendData),
+        options
+      )
+      .then((result) => {
+        setEvents(result.data);
+      });
+  }, []);
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleClickOpen = (arg) => {
+    arg.jsEvent.preventDefault();
+    setOpen(true);
+    setModalTitle(arg.event.title);
+    setDescription(arg.event.extendedProps.description);
+    setDtartdate(moment(arg.event.start).format("Do MMM, YYYY"));
+    setTime(moment(arg.event.start).format("hh:mm a"));
+    setTimeend(moment(arg.event.end).format("hh:mm a"));
+    setStatus(arg.event.extendedProps.status);
+    setUrls(arg.event.url);
+    var newlink = btoa("id=" + arg.event.id + "&user_id=" + user);
+    setMylink("https://www.insaid.co/sessionlink.php?token=" + newlink);
+    setToday(moment().format("DD-MM-Y"));
+    var curtime = moment().format("HH:mm:ss");
+    var a = curtime.split(":");
+    setCs(+a[0] * 60 * 60 + +a[1] * 60 + +a[2]);
+    setEd(moment(arg.event.start).format("DD-MM-Y"));
+    var start_time = moment(arg.event.start).format("HH:mm:ss");
+    var b = start_time.split(":");
+    setSts(+b[0] * 60 * 60 + +b[1] * 60 + +b[2]);
+    var end_time = moment(arg.event.end).format("HH:mm:ss");
+    var c = end_time.split(":");
+    setEts(+c[0] * 60 * 60 + +c[1] * 60 + +c[2]);
+  };
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handlePopoverOpen = (arg) => {
+    setAnchorEl(arg.event.title);
+  };
+  
+  const handlePopoverClose = () => {
+    setAnchorEl(null);
+  };
+  
+  const opens = Boolean(anchorEl);
+  const tooletext = (arg) => {
+    arg.jsEvent.preventDefault();
+    setToday(moment().format("DD-MM-Y"));
+    var curtime = moment().format("HH:mm:ss");
+    var a = curtime.split(":");
+    setCs(+a[0] * 60 * 60 + +a[1] * 60 + +a[2]);
+    setEd(moment(arg.event.start).format("DD-MM-Y"));
+    var start_time = moment(arg.event.start).format("HH:mm:ss");
+    var b = start_time.split(":");
+    setSts(+b[0] * 60 * 60 + +b[1] * 60 + +b[2]);
+    var end_time = moment(arg.event.end).format("HH:mm:ss");
+    var c = end_time.split(":");
+    setEts(+c[0] * 60 * 60 + +c[1] * 60 + +c[2]);
+    setModalTitle(arg.event.title);
+    setAnchorEl(arg.event.currentTarget);
+  };
+
+  return (
+    <>
+      
+      <Box sx={{ backgroundColor: "#f3f6f9", pb:3 }}>
+        <Box sx={{pt:10}}>
+        <Loginnav/>
+          <Grid container>
+           
+            <Grid item lg={12}>
+          
+              <Box>
+                <Paper
+                  sx={{
+                    p: 2,
+                   
+                    boxShadow: "0 0 20px 0 rgb(76 87 125 / 2%)",
+                  }}
+                >
+                  <Typography
+                    sx={{
+                      fontWeight: "bold",
+                      fontSize: "1rem",
+                      marginBottom: "1.2rem!important",
+                    }}
+                  >
+                    Event Calendar
+                  </Typography>
+
+                  <FullCalendar
+                       
+                    plugins={[
+                      dayGridPlugin,
+                      timeGridPlugin,
+                      listPlugin,
+                      interactionPlugin,
+                    ]}
+                    initialView="dayGridMonth"
+                    disableDragging={false}
+                    editable={false}
+                    dayMaxEventRows={true}
+                    timezone={false}
+                    navLinks={true}
+                    selectable={true}
+                    selectMirror={true}
+                    displayEventTime={false}
+                    nowIndicator={true}
+                    eventStartEditable={false}
+                    headerToolbar={{
+                      left: "prev,next today",
+                      center: "title",
+                      right: "dayGridMonth,timeGridWeek,timeGridDay,listWeek",
+                    }}
+                    views={{
+                      timeGrid: {
+                        dayMaxEventRows: 2,
+                      },
+                      dayGridMonth: {
+                        editable: false,
+                        dayMaxEventRows: 2,
+                      },
+                    }}
+                    events={newevent}
+                    eventClick={handleClickOpen}
+                
+                 
+                  />
+                </Paper>
+              </Box>
+            </Grid>
+          </Grid>
+        </Box>
+      </Box>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-describedby="alert-dialog-description"
+        sx={{
+          "& .MuiDialog-paper": {
+            maxWidth: "733px",
+            width: "634px",
+          },
+        }}
+      >
+        <DialogTitle>
+          <CloseIcon onClick={handleClose} sx={{ float: "right" }} />
+        </DialogTitle>
+        <DialogContent sx={{ px: 5 }}>
+          <DialogContentText id="alert-dialog-description">
+            <Typography
+              sx={{ fontWeight: 600, fontSize: "0.85rem", color: "#111" }}
+            >
+              {modalTitle}
+            </Typography>
+            <Box sx={{ display: "flex!important",my:2 }}>
+              <MessageIcon
+                sx={{ fontSize: "1.4rem", color: "#a1a5b7", mr: 3 }}
+              />
+              <Typography
+                sx={{ fontWeight: 600, fontSize: "0.85rem", color: "#181c32" }}
+              >
+                {description}
+              </Typography>
+            </Box>
+            <Box sx={{ display: "flex!important",my:2 }}>
+              <CalendarMonthIcon
+                sx={{ fontSize: "1.4rem", color: "#a1a5b7", mr: 3 }}
+              />{" "}
+              <Typography
+                sx={{ fontWeight: 600, fontSize: "0.85rem", color: "#181c32" }}
+              >
+                Start Date: {startdate}
+              </Typography>
+            </Box>
+            <Box sx={{ display: "flex!important",my:2 }}>
+              <FiberManualRecordIcon
+                sx={{ fontSize: "1.4rem", color: "#50cd89", mr: 3 }}
+              />{" "}
+              <Typography
+                sx={{ fontWeight: 600, fontSize: "0.85rem", color: "#111" }}
+              >
+                Starts Time: {starttime}
+              </Typography>
+            </Box>
+            <Box sx={{ display: "flex!important",my:2 }}>
+              <FiberManualRecordIcon
+                sx={{ fontSize: "1.4rem", color: "#f1416c", mr: 3 }}
+              />
+              <Typography
+                sx={{ fontWeight: 600, fontSize: "0.85rem", color: "#111" }}
+              >
+                Ends Time : {endtime}
+              </Typography>
+            </Box>
+
+            <Box sx={{ display: "flex!important",my:2 }}>
+              {(() => {
+                if (status == 2) {
+                  return (
+                    <>
+                      <LocationOnIcon
+                        sx={{ fontSize: "1.4rem", color: "#a1a5b7", mr: 3 }}
+                      />{" "}
+                      <Typography
+                        sx={{
+                          fontSize: "0.95rem",
+                          color: "red",
+                          fontWeight: 600,
+                        }}
+                      >
+                        {" "}
+                        event canceled
+                      </Typography>
+                    </>
+                  );
+                } else {
+                  return (
+                    <>
+                      {(() => {
+                        if (
+                          today == eventdate &&
+                          curtimeseconds > starttimeseconds - 60 * 30 &&
+                          curtimeseconds < endtimeseconds + 60 * 30
+                        ) {
+                          return (
+                            <>
+                              <LocationOnIcon
+                                sx={{
+                                  fontSize: "1.4rem",
+                                  color: "#a1a5b7",
+                                  mr: 3,
+                                }}
+                              />{" "}
+                              <Typography
+                                sx={{ fontSize: "0.85rem", color: "#111" }}
+                              >
+                                {" "}
+                                <Link
+                                  href={mylink}
+                                  underline="none"
+                                  sx={{ color: "#00802b" }}
+                                >
+                                  {" "}
+                                  Click Here to Join
+                                </Link>
+                              </Typography>
+                            </>
+                          );
+                        } else {
+                          return (
+                            <>
+                              <LocationOnIcon
+                                sx={{
+                                  fontSize: "1.4rem",
+                                  color: "#a1a5b7",
+                                  mr: 3,
+                                }}
+                              />{" "}
+                              <Typography
+                                sx={{ fontSize: "0.85rem", color: "#111" }}
+                              >
+                              
+                                  {" "}
+                                  Click Here to Join
+                               
+                              </Typography>
+                            </>
+                          );
+                        }
+                      })()}
+                    </>
+                  );
+                }
+              })()}
+            </Box>
+          </DialogContentText>
+        </DialogContent>
+      </Dialog>
+    
+
+    </>
+  );
+};
+export default Calendar;
