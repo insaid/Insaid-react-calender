@@ -42,7 +42,7 @@ ElevationScroll.propTypes = {
   window: PropTypes.func,
 };
 
-export default function Loginnav(props) {
+export default function Myaccountnav(props) {
 const [anchorEl, setAnchorEl] = useState(null)
   const [noanchorEl, setNoanchorEl] = useState(null);
   const [count ,setCount] =useState("");
@@ -97,98 +97,7 @@ const [anchorEl, setAnchorEl] = useState(null)
                     />
                </Box>
 
-                    {(() => {
-                      if (count == "1") {
-                        return (
-                          <Box
-                            display="flex"
-                            sx={{
-                              float: "right",
-                              border: "1px solid #fff",
-                              borderRadius: "8px",
-                              py: 0.4,
-                              px: 1,
-                              ml: 3,
-                             
-                            }}
-                          >
-                            {" "}
-                            <Typography
-                              sx={{
-                                fontSize: "1rem",
-                                marginBottom: "0.5rem !important",
-                                mx: 2,
-                                pt: 1,
-                                fontWeight: "bold",
-                                color: "#fff",
-                              }}
-                            >
-                              Home
-                            </Typography>
-                          </Box>
-                        );
-                      }   
-                      else {
-                        return (
-                          <Link to="/Myaccount">
-                            <Box
-                              display="flex"
-                              sx={{
-                                float: "right",
-                                border: "1px solid #fff",
-                                borderRadius: "8px",
-                                py: 0.4,
-                                px: 1,
-                                ml: 3,
-                               
-                              }}
-                            >
-                              {" "}
-                              <Typography
-                                sx={{
-                                  fontSize: "1rem",
-                                  marginBottom: "0.5rem !important",
-                                  mx: 2,
-                                  pt: 1,
-                                  fontWeight: "bold",
-                                  color: "#fff",
-                                }}
-                              >
-                                Home
-                              </Typography>
-                            </Box>
-                          </Link>
-                        );
-                      }
-                    })()}
-                    <Box
-                            
-                            sx={{
-                              float: "right",
-                              border: "1px solid #fff",
-                              borderRadius: "8px",
-                              py: 0.4,
-                              px: 1,
-                              ml: 3,
-                              display: { xs: "block", lg: "none" }
-                            }}
-                          >
-             <Typography
-                            sx={{
-                              fontSize: "1rem",
-                              marginBottom: "0.5rem !important",
-                              mx: 2,
-                              pt: 1,
-                              fontWeight: "bold",
-                              color: "#fff",
-                              
-                            }}
-                            onClick={LogOut}
-                          >
-                            Logout
-                          </Typography>
-          {/* <Button variant="contained" sx={{float:"right",mb: 2}}  >Logout</Button> */}
-          </Box>
+
                </Box>
       
                </Grid>

@@ -13,7 +13,7 @@ import { Link, useNavigate,useParams } from "react-router-dom";
 import calendarimg from "./images/schedule.png";
 import Footer from "./Navbar/Footer";
 // import Withoutlogin from "./Navbar/Withoutlogin";
-import Loginnav from "./Navbar/Loginnav";
+import Myaccountnav from "./Navbar/myaccountnav";
 import axios from "axios";
 import ClientConfig from "./client";
 const Myaccount = () => {
@@ -61,7 +61,7 @@ const Myaccount = () => {
   if (enrooll == "2") {
     return (
       <>
-        <Loginnav />
+        <Myaccountnav />
         <Box sx={{ backgroundColor: "#f3f6f9", pb: 17 }}>
           <Box sx={{ pt: 10 }}>
             <Container fixed>
