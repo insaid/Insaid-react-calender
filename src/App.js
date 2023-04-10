@@ -15,6 +15,7 @@ function App () {
     
       <Routes>
         <Route path='/' element={<Login />} />
+        <Route path='/:id' element={<Login />} />
         <Route path='/Myaccount' element={<Myaccount/>} />
         <Route path='/Calendar' element={<Calendar/>} />
    

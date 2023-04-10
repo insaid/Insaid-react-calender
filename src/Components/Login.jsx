@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Typography, Button, Box, Paper, Container, Grid,Backdrop,FormControl,InputLabel,Input,InputAdornment} from "@mui/material";
 import TextField from "@mui/material/TextField";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useParams } from "react-router-dom";
 import clientConfig from "./client";
 import Withoutlogin from "./Navbar/Withoutlogin";
 import Footer from "./Navbar/Footer";
@@ -13,8 +13,11 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import IconButton from '@mui/material/IconButton';
 import ClientConfig from "./client";
+import { decode as atob, encode as btoa } from "base-64";
+
 
 export default function Login() {
+  const { id } = useParams();
   function clearConsole() {
     if (window.console || window.console.firebug) {
       console.clear();
@@ -38,10 +41,59 @@ const LoaderOpen = () => {
   setOpen(true);
 };
   let navigate = useNavigate();
+  const siteUrl = ClientConfig.siteUrl;
+  console.log(id);
+if(id){
+  const sendData = {
+    email: atob(id),
+  };
+  const options = {
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Content-Type": "application/json",
+    },
+  };
+  axios
+    .post(`${siteUrl}/login`, sendData, options)
+    .then((result) => {
+      // console.log(res.data, "erooll");
+
+      navigate(`/Myaccount`);
+      if (result.data.count == "2") {
+        localStorage.setItem("count", result.data.count);
+        localStorage.setItem("email", atob(id));
+        navigate(`/Myaccount`);
+        clearConsole();
+      } else if (result.data.count == "1") {
+        localStorage.setItem("enrol_id", result.data.enrol_id);
+        localStorage.setItem("program_id", result.data.program_id);
+        localStorage.setItem("category", result.data.category);
+        localStorage.setItem("count", result.data.count);
+
+        navigate(`/Calendar`);
+        clearConsole();
+      }
+      LoaderClose();
+    })
+    .catch((err) => {
+      toast.error("Email and Password are not matched", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+      console.log(err);
+      LoaderClose();
+    });
+}
   const HandleLogin = (e) => {
     LoaderOpen();
     e.preventDefault();
-    const siteUrl = ClientConfig.siteUrl;
+ 
     // const options = {
     // 	headers: {
     // 	  "Access-Control-Allow-Origin": "*",
@@ -121,6 +173,12 @@ const LoaderOpen = () => {
   };
 
   // console.log(sendData);
+if(id){
+  return (
+    <CircularProgress />
+  );
+}
+else{
   return (
     <>
       
@@ -206,3 +264,5 @@ const LoaderOpen = () => {
     </>
   );
 }
+}
+

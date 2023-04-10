@@ -8,15 +8,16 @@ import {
   Grid,
   CardMedia,
 } from "@mui/material";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate,useParams } from "react-router-dom";
 // import Loginnav from "./Navbar/Loginnav";
 import calendarimg from "./images/schedule.png";
 import Footer from "./Navbar/Footer";
-import Withoutlogin from "./Navbar/Withoutlogin";
-
+// import Withoutlogin from "./Navbar/Withoutlogin";
+import Loginnav from "./Navbar/Loginnav";
 import axios from "axios";
 import ClientConfig from "./client";
 const Myaccount = () => {
+  const { id } = useParams();
   const [user, setUser] = useState("");
   const [enrooll, setEnrooll] = useState("");
   let navigate = useNavigate();
@@ -27,16 +28,21 @@ const Myaccount = () => {
       "Content-Type": "application/json",
     },
   };
+  
 
+
+ 
   const sendData = {
     email: localStorage.getItem("email"),
+   
   };
   const siteUrl = ClientConfig.siteUrl;
   useEffect(() => {
     // console.log(auth)
-
+   
     var enrooll = localStorage.getItem("count");
     setEnrooll(enrooll);
+   
     axios
       .post(`${siteUrl}/login/fetchinfo `, sendData, options)
       .then((result) => {
@@ -55,7 +61,7 @@ const Myaccount = () => {
   if (enrooll == "2") {
     return (
       <>
-        <Withoutlogin />
+        <Loginnav />
         <Box sx={{ backgroundColor: "#f3f6f9", pb: 17 }}>
           <Box sx={{ pt: 10 }}>
             <Container fixed>
