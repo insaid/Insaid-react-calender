@@ -95,8 +95,8 @@ const Calendar = () => {
     setStatus(arg.event.extendedProps.status);
     setUrls(arg.event.url);
     var newlink = btoa("id=" + arg.event.id + "&user_id=" + user);
-    setMylink("https://www.insaid.co/sessionlink.php?token=" + newlink);
-    console.log(setMylink);
+    setMylink("https://www.insaid.co/sessionlinks.php?token=" + newlink);
+    console.log(arg.event.id);
     setToday(moment().format("DD-MM-Y"));
     var curtime = moment().format("HH:mm:ss");
     var a = curtime.split(":");
