@@ -50,9 +50,10 @@ const Myaccount = () => {
         console.log(result.data);
       });
   }, []);
-  const handleClickOpen = (enrol_id, category, program_id) => {
+  const handleClickOpen = (enrol_id, category, program_id,user_id) => {
     console.log(enrol_id, category);
     window.localStorage.setItem("enrol_id", enrol_id);
+    window.localStorage.setItem("user_id", user_id);
     window.localStorage.setItem("category", category);
     window.localStorage.setItem("program_id", program_id);
     navigate(`/Calendar`);
@@ -72,7 +73,7 @@ const Myaccount = () => {
               </Box>
               <Grid container rowSpacing={1} sx={{ justifyContent: "center" }}>
                 {program &&
-                  program.map(({ enrol_id, program_id, category }) => {
+                  program.map(({ enrol_id, program_id, category,user_id }) => {
                     if (program_id == "1" || program_id == "10") {
                       return (
                         <Grid item lg={4} md={12} sm={12} sx={{ mx: 2 }}>
@@ -90,7 +91,7 @@ const Myaccount = () => {
                                 mt: 12,
                               }}
                               onClick={() =>
-                                handleClickOpen(enrol_id, category, program_id)
+                                handleClickOpen(enrol_id, category, program_id,user_id,user_id)
                               }
                             >
                               <center>
@@ -133,7 +134,7 @@ const Myaccount = () => {
                                 mt: 12,
                               }}
                               onClick={() =>
-                                handleClickOpen(enrol_id, category, program_id)
+                                handleClickOpen(enrol_id, category, program_id,user_id)
                               }
                             >
                               <center>
@@ -176,7 +177,7 @@ const Myaccount = () => {
                                 mt: 12,
                               }}
                               onClick={() =>
-                                handleClickOpen(enrol_id, category, program_id)
+                                handleClickOpen(enrol_id, category, program_id,user_id)
                               }
                             >
                               <center>
@@ -219,7 +220,7 @@ const Myaccount = () => {
                                 mt: 12,
                               }}
                               onClick={() =>
-                                handleClickOpen(enrol_id, category, program_id)
+                                handleClickOpen(enrol_id, category, program_id,user_id)
                               }
                             >
                               <center>
@@ -262,7 +263,7 @@ const Myaccount = () => {
                                 mt: 12,
                               }}
                               onClick={() =>
-                                handleClickOpen(enrol_id, category, program_id)
+                                handleClickOpen(enrol_id, category, program_id,user_id)
                               }
                             >
                               <center>
@@ -305,7 +306,7 @@ const Myaccount = () => {
                                 mt: 12,
                               }}
                               onClick={() =>
-                                handleClickOpen(enrol_id, category, program_id)
+                                handleClickOpen(enrol_id, category, program_id,user_id)
                               }
                             >
                               <center>
@@ -348,7 +349,7 @@ const Myaccount = () => {
                                 mt: 12,
                               }}
                               onClick={() =>
-                                handleClickOpen(enrol_id, category, program_id)
+                                handleClickOpen(enrol_id, category, program_id,user_id)
                               }
                             >
                               <center>
@@ -391,7 +392,7 @@ const Myaccount = () => {
                                 mt: 12,
                               }}
                               onClick={() =>
-                                handleClickOpen(enrol_id, category, program_id)
+                                handleClickOpen(enrol_id, category, program_id,user_id)
                               }
                             >
                               <center>
@@ -434,7 +435,7 @@ const Myaccount = () => {
                                 mt: 12,
                               }}
                               onClick={() =>
-                                handleClickOpen(enrol_id, category, program_id)
+                                handleClickOpen(enrol_id, category, program_id,user_id)
                               }
                             >
                               <center>
@@ -477,7 +478,7 @@ const Myaccount = () => {
                                 mt: 12,
                               }}
                               onClick={() =>
-                                handleClickOpen(enrol_id, category, program_id)
+                                handleClickOpen(enrol_id, category, program_id,user_id)
                               }
                             >
                               <center>
@@ -520,7 +521,7 @@ const Myaccount = () => {
                                 mt: 12,
                               }}
                               onClick={() =>
-                                handleClickOpen(enrol_id, category, program_id)
+                                handleClickOpen(enrol_id, category, program_id,user_id)
                               }
                             >
                               <center>
@@ -563,7 +564,7 @@ const Myaccount = () => {
                                 mt: 12,
                               }}
                               onClick={() =>
-                                handleClickOpen(enrol_id, category, program_id)
+                                handleClickOpen(enrol_id, category, program_id,user_id)
                               }
                             >
                               <center>

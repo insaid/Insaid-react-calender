@@ -132,6 +132,7 @@ if(id){
               clearConsole();
             } else if (result.data.count == "1") {
               localStorage.setItem("enrol_id", result.data.enrol_id);
+              localStorage.setItem("user_id", result.data.user_id);
               localStorage.setItem("program_id", result.data.program_id);
               localStorage.setItem("category", result.data.category);
               localStorage.setItem("count", result.data.count);
