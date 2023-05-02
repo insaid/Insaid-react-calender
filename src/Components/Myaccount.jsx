@@ -64,7 +64,7 @@ const Myaccount = () => {
       <>
         <Myaccountnav />
         <Box sx={{ backgroundColor: "#f3f6f9", pb: 17 }}>
-          <Box sx={{ pt: 10 }}>
+          <Box sx={{ pt: 10 , height:520 }}>
             <Container fixed>
               <Box sx={{ mt: 5 }}>
                 <Typography sx={{ textAlign: "center", fontSize: "1.5rem" }}>

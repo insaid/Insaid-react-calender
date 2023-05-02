@@ -184,12 +184,12 @@ else{
   return (
     <>
       
-      <Box sx={{ pt: 20, pb: 6.5 }}>
+      <Box sx={{ pt:28}}>
       <ToastContainer />
         <Container fixed>
           <Box>
             <Withoutlogin />
-            <Box sx={{ my: "auto" }}>
+            <Box sx={{ alignItems:"center" }}>
               <Grid container spacing={4} justifyContent="center">
               <Backdrop
         sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}

@@ -11,6 +11,7 @@ import {
   DialogContent,
   DialogContentText,
   Popover ,
+  CardMedia,
 } from "@mui/material";
 
 import { useNavigate } from "react-router-dom";
@@ -24,9 +25,10 @@ import CloseIcon from "@mui/icons-material/Close";
 import MessageIcon from "@mui/icons-material/Message";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
-import Footer from "./Navbar/Footer";
+import liveimg from './images/live.png'
+import liveno from './images/livno.png'
 import moment from "moment";
-
+import CancelIcon from '@mui/icons-material/Cancel';
 import { decode as atob, encode as btoa } from "base-64";
 import Loginnav from "./Navbar/Loginnav";
 import "./calender.css";
@@ -276,7 +278,7 @@ const Calendar = () => {
                 if (status == 2) {
                   return (
                     <>
-                      <LocationOnIcon
+                      <CancelIcon
                         sx={{ fontSize: "1.4rem", color: "#a1a5b7", mr: 3 }}
                       />{" "}
                       <Typography
@@ -302,15 +304,22 @@ const Calendar = () => {
                         ) {
                           return (
                             <>
-                              <LocationOnIcon
-                                sx={{
-                                  fontSize: "1.4rem",
-                                  color: "#a1a5b7",
-                                  mr: 3,
-                                }}
-                              />{" "}
+                               <CardMedia
+                      component="img"
+                      image={liveimg}
+                      alt="green iguana"
+                      sx={{
+                      
+                        width: 48,
+                    
+                        objectFit: "unset",
+                        
+                      }}
+                      className="blink-image"
+                    
+                    />
                               <Typography
-                                sx={{ fontSize: "0.85rem", color: "#111" }}
+                                sx={{ fontSize: "0.85rem", color: "#111" ,ml:2 }}
                               >
                                 {" "}
                                 <Link
@@ -328,15 +337,23 @@ const Calendar = () => {
                         } else {
                           return (
                             <>
-                              <LocationOnIcon
-                                sx={{
-                                  fontSize: "1.4rem",
-                                  color: "#a1a5b7",
-                                  mr: 3,
-                                }}
-                              />{" "}
+                           <CardMedia
+                      component="img"
+                      image={liveno}
+                      alt="green iguana"
+                      sx={{
+                      
+                        width: 48,
+                    
+                        objectFit: "unset",
+                        
+                      }}
+                   
+                    
+                    />
+               
                               <Typography
-                                sx={{ fontSize: "0.85rem", color: "#111" }}
+                                sx={{ fontSize: "0.85rem", color: "#111",ml:2 }}
                               >
                               
                                   {" "}
