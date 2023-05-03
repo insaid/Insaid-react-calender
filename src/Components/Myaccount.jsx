@@ -595,6 +595,7 @@ const Myaccount = () => {
             </Container>
           </Box>
         </Box>
+        <Footer/>
       </>
     );
   }

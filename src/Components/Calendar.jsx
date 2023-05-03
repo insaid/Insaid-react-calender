@@ -33,7 +33,7 @@ import { decode as atob, encode as btoa } from "base-64";
 import Loginnav from "./Navbar/Loginnav";
 import "./calender.css";
 import axios from "axios";
-
+import Footer from "./Navbar/Footer";
 const Calendar = () => {
   const [user, setUser] = useState("");
   const [enrol_id, setEnrol_id] = useState("");
@@ -373,7 +373,7 @@ const Calendar = () => {
         </DialogContent>
       </Dialog>
     
-
+<Footer/>
     </>
   );
 };

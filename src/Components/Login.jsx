@@ -263,7 +263,7 @@ else{
           </Box>
         </Container>
       </Box>
-     
+      <Footer />
     </>
   );
 }
