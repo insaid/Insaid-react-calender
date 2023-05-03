@@ -63,7 +63,7 @@ const Myaccount = () => {
     return (
       <>
         <Myaccountnav />
-        <Box sx={{ backgroundColor: "#f3f6f9", pb: 17 }}>
+        <Box sx={{ backgroundColor: "#f3f6f9", pb: 10.1 }}>
           <Box sx={{ pt: 10 , height:520 }}>
             <Container fixed>
               <Box sx={{ mt: 5 }}>
