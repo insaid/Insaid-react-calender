@@ -373,7 +373,26 @@ const Calendar = () => {
         </DialogContent>
       </Dialog>
     
-<Footer/>
+      <Box sx={{ background: "#262626",paddingRight:"0px!important",py:2,  display: { xs: "none", lg: "block" }}}>
+           
+
+               <Grid item lg={10}>
+                <Box sx={{}}>
+                    <Typography sx={{textAlign:"center",color:"#fff",mr:3}}>© 2023 INSAID. All Rights Reserved</Typography>
+                </Box>
+               </Grid>
+              
+               </Box>
+               <Box sx={{ background: "#262626",paddingRight:"0px!important",py:2,  display: { xs: "block", lg: "none" },}}>
+             
+    
+                  <Grid item xs={12}>
+                   <Box>
+                       <Typography sx={{textAlign:"center",color:"#fff",mr:3}}>© 2023 INSAID. All Rights Reserved</Typography>
+                   </Box>
+                  </Grid>
+              
+                  </Box>
     </>
   );
 };
