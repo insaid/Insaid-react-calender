@@ -73,7 +73,7 @@ const Calendar = () => {
     setCategory(category);
     axios
       .post(
-        "https://carbide-tenure-384812.de.r.appspot.com/calendar/fetchevents/",
+        "http://localhost:50003/calendar/fetchevents/",
         JSON.stringify(sendData),
         options
       )
@@ -100,7 +100,7 @@ const Calendar = () => {
     setMylink("https://www.insaid.co/sessionlinks.php?token=" + newlink);
     console.log(user);
     setToday(moment().format("DD-MM-Y"));
-    var curtime = moment().format("HH:mm:ss");
+    var curtime = moment().utcOffset("+05:30").format("HH:mm:ss");
     var a = curtime.split(":");
     setCs(+a[0] * 60 * 60 + +a[1] * 60 + +a[2]);
     setEd(moment(arg.event.start).format("DD-MM-Y"));
@@ -111,6 +111,9 @@ const Calendar = () => {
     var c = end_time.split(":");
     setEts(+c[0] * 60 * 60 + +c[1] * 60 + +c[2]);
   };
+  console.log(curtimeseconds);
+  console.log(starttimeseconds);
+  console.log(endtimeseconds);
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handlePopoverOpen = (arg) => {
@@ -125,16 +128,16 @@ const Calendar = () => {
   const tooletext = (arg) => {
     arg.jsEvent.preventDefault();
     setToday(moment().format("DD-MM-Y"));
-    var curtime = moment().format("HH:mm:ss");
+    var curtime = moment().utcOffset("+05:30").format("HH:mm:ss");
     var a = curtime.split(":");
     setCs(+a[0] * 60 * 60 + +a[1] * 60 + +a[2]);
     setEd(moment(arg.event.start).format("DD-MM-Y"));
     var start_time = moment(arg.event.start).format("HH:mm:ss");
     var b = start_time.split(":");
-    setSts(+b[0] * 60 * 60 + +b[1] * 60 + +b[2]);
+    setSts(+b[0] * 120 * 60 + +b[1] * 120 + +b[2]);
     var end_time = moment(arg.event.end).format("HH:mm:ss");
     var c = end_time.split(":");
-    setEts(+c[0] * 60 * 60 + +c[1] * 60 + +c[2]);
+    setEts(+c[0] * 120 * 60 + +c[1] * 120 + +c[2]);
     setModalTitle(arg.event.title);
     setAnchorEl(arg.event.currentTarget);
   };
@@ -299,8 +302,8 @@ const Calendar = () => {
                       {(() => {
                         if (
                           today == eventdate &&
-                          curtimeseconds > starttimeseconds - 60 * 30 &&
-                          curtimeseconds < endtimeseconds + 60 * 30
+                          curtimeseconds > starttimeseconds - 120 * 30 &&
+                          curtimeseconds < endtimeseconds + 120 * 30
                         ) {
                           return (
                             <>
