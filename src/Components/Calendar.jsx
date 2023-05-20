@@ -73,7 +73,7 @@ const Calendar = () => {
     setCategory(category);
     axios
       .post(
-        "https://carbide-tenure-384812.de.r.appspot.com/calendar/fetchevents/",
+        "https://event-calendar-custom-login.ue.r.appspot.com/calendar/fetchevents/",
         JSON.stringify(sendData),
         options
       )

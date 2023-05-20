@@ -44,7 +44,7 @@ const Myaccount = () => {
     setEnrooll(enrooll);
    
     axios
-      .post(`${siteUrl}/login/fetchinfo `, sendData, options)
+      .post(`${siteUrl}/data/fetchinfo `, sendData, options)
       .then((result) => {
         setData(result.data);
         console.log(result.data);

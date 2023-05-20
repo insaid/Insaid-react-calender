@@ -23,6 +23,7 @@ export default function Login() {
       console.clear();
     }
   }
+  var CryptoJS = require("crypto-js");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [open, setOpen] = useState(false);
@@ -54,7 +55,7 @@ if(id){
     },
   };
   axios
-    .post(`${siteUrl}/login`, sendData, options)
+    .post(`${siteUrl}/data`, sendData, options)
     .then((result) => {
       // console.log(res.data, "erooll");
 
@@ -95,24 +96,24 @@ if(id){
     LoaderOpen();
     e.preventDefault();
  
-    // const options = {
-    // 	headers: {
-    // 	  "Access-Control-Allow-Origin": "*",
-    // 	  "Content-Type": "application/json",
-    // 	},
-    //   };
+    const options = {
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
+      },
+    };
     const loginData = {
       username: username,
-      password: password,
+      password: CryptoJS.AES.encrypt(password,'INSAID@login$2022@$newweb$@').toString(),
     };
     axios
-      .post("https://www.insaid.co/wp-json/jwt-auth/v1/token", loginData)
+      .post(`${siteUrl}/login`, JSON.stringify(loginData),options,{ withCredentials: true, })
       .then((res) => {
         console.log(res.data, "auth");
-        localStorage.setItem("email", res.data.user_email);
-
+        localStorage.setItem("email", username);
+if(res.data.status == 200){
         const sendData = {
-          email: res.data.user_email,
+          email: username,
         };
         const options = {
           headers: {
@@ -121,7 +122,7 @@ if(id){
           },
         };
         axios
-          .post(`${siteUrl}/login`, sendData, options)
+          .post(`${siteUrl}/data`, sendData, options)
           .then((result) => {
             console.log(res.data, "erooll");
 
@@ -157,7 +158,9 @@ if(id){
             console.log(err);
             LoaderClose();
           });
+        }
       })
+    
       .catch((err) => {
         toast.error("Email and Password are not matched", {
           position: "top-right",
