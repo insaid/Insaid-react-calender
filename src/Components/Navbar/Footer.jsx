@@ -72,7 +72,7 @@ const [anchorEl, setAnchorEl] = useState(null)
 
                <Grid item lg={10}>
                 <Box sx={{}}>
-                    <Typography sx={{textAlign:"center",color:"#fff",mr:3}}>© 2023 INSAID. All Rights Reserved</Typography>
+                    <Typography sx={{textAlign:"center",color:"#fff",mr:3}}>© 2023 ACCREDIAN. All Rights Reserved</Typography>
                 </Box>
                </Grid>
               
@@ -82,7 +82,7 @@ const [anchorEl, setAnchorEl] = useState(null)
     
                   <Grid item xs={12}>
                    <Box>
-                       <Typography sx={{textAlign:"center",color:"#fff",mr:3}}>© 2023 INSAID. All Rights Reserved</Typography>
+                       <Typography sx={{textAlign:"center",color:"#fff",mr:3}}>© 2023 ACCREDIAN. All Rights Reserved</Typography>
                    </Box>
                   </Grid>
               
