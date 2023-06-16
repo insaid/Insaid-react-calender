@@ -159,6 +159,19 @@ if(res.data.status == 200){
             LoaderClose();
           });
         }
+        else if(res.data.status == 400){
+          toast.error("Email and Password are not matched", {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
+          LoaderClose();
+          }
       })
     
       .catch((err) => {
