@@ -74,7 +74,7 @@ const Myaccount = () => {
               <Grid container rowSpacing={1} sx={{ justifyContent: "center" }}>
                 {program &&
                   program.map(({ enrol_id, program_id, category,user_id }) => {
-                    if (program_id == "1" || program_id == "10") {
+                    if (program_id == "1" || program_id == "10" || program_id == "29" || program_id == "33" || program_id == "40" || program_id == "41") {
                       return (
                         <Grid item lg={4} md={12} sm={12} sx={{ mx: 2 }}>
                           <center>
@@ -584,6 +584,49 @@ const Myaccount = () => {
                                 }}
                               >
                                 PM Calendar
+                              </Typography>
+                            </Box>
+                          </center>
+                        </Grid>
+                      );
+                    }
+                    if (program_id == "38" || program_id == "39") {
+                      return (
+                        <Grid item lg={4} md={12} sm={12} sx={{ mx: 2 }}>
+                          <center>
+                            <Box
+                              sx={{
+                                boxShadow:
+                                  "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px",
+                                height: "161px",
+                                width: "200px",
+                                borderRadius: "25px",
+                                backgroundColor: "#08AEEA",
+                                backgroundImage:
+                                  "linear-gradient(0deg, #08AEEA 0%, #2AF598 100%)",
+                                mt: 12,
+                              }}
+                              onClick={() =>
+                                handleClickOpen(enrol_id, category, program_id,user_id)
+                              }
+                            >
+                              <center>
+                                {" "}
+                                <CardMedia
+                                  component="img"
+                                  image={calendarimg}
+                                  alt="green iguana"
+                                  sx={{ width: "128px", ml: 0.5 }}
+                                />
+                              </center>
+                              <Typography
+                                sx={{
+                                  textAlign: "center",
+                                  color: "#fff",
+                                  fontWeight: "bold",
+                                }}
+                              >
+                                XLRI Calendar
                               </Typography>
                             </Box>
                           </center>
