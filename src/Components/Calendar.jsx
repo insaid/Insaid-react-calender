@@ -36,6 +36,7 @@ import "./calender.css";
 import axios from "axios";
 import Footer from "./Navbar/Footer";
 import CircularProgress from '@mui/material/CircularProgress';
+import Swal from 'sweetalert2';
 const Calendar = () => {
   const [user, setUser] = useState("");
   const [enrol_id, setEnrol_id] = useState("");
@@ -82,8 +83,19 @@ const Calendar = () => {
         options
       )
       .then((result) => {
-        setEvents(result.data);
-        LoaderClose();
+        if(result.data.status == 400){
+          Swal.fire({
+            title: "warning",
+            text: "Events are not available",
+            icon: "warning",
+            confirmButtonText: "OK",
+          });
+          LoaderClose();
+        }else{
+          setEvents(result.data);
+          LoaderClose();
+        }
+    
       });
   }, []);
 
