@@ -4,7 +4,7 @@ import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import CssBaseline from "@mui/material/CssBaseline";
 import useScrollTrigger from "@mui/material/useScrollTrigger";
-
+import logo from '../images/accredain.webp';
 
 import {
 
@@ -76,11 +76,11 @@ const [anchorEl, setAnchorEl] = useState(null)
                   <Box>
                     <CardMedia
                       component="img"
-                      image="https://www.insaid.co/wp-content/uploads/2021/01/white-logo.png"
+                      image={logo}
                       alt="green iguana"
                       sx={{
                         display: { xs: "block", lg: "block" },
-                        width: 100,
+                        width: 120,
                         py: 1,
                         objectFit: "unset",
                       }}

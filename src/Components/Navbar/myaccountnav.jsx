@@ -14,6 +14,7 @@ import SyncLockIcon from '@mui/icons-material/SyncLock';
 import Logout from "@mui/icons-material/Logout";
 import { Link, useNavigate, } from "react-router-dom";
 import axios from "axios";
+import logo from '../images/accredain.webp';
 import {
   Typography,
   Button,
@@ -86,11 +87,11 @@ const [anchorEl, setAnchorEl] = useState(null)
                   <Box>
                     <CardMedia
                       component="img"
-                      image="https://www.insaid.co/wp-content/uploads/2021/01/white-logo.png"
+                      image={logo}
                       alt="green iguana"
                       sx={{
                         display: { xs: "block", lg: "block" },
-                        width: 100,
+                        width: 120,
                         py: 1,
                         objectFit: "unset",
                       }}

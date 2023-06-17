@@ -23,6 +23,7 @@ export default function Login() {
       console.clear();
     }
   }
+  var CryptoJS = require("crypto-js");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [open, setOpen] = useState(false);
@@ -54,7 +55,7 @@ if(id){
     },
   };
   axios
-    .post(`${siteUrl}/login`, sendData, options)
+    .post(`${siteUrl}/data`, sendData, options)
     .then((result) => {
       // console.log(res.data, "erooll");
 
@@ -66,6 +67,7 @@ if(id){
         clearConsole();
       } else if (result.data.count == "1") {
         localStorage.setItem("enrol_id", result.data.enrol_id);
+        localStorage.setItem("user_id", result.data.user_id);
         localStorage.setItem("program_id", result.data.program_id);
         localStorage.setItem("category", result.data.category);
         localStorage.setItem("count", result.data.count);
@@ -94,24 +96,24 @@ if(id){
     LoaderOpen();
     e.preventDefault();
  
-    // const options = {
-    // 	headers: {
-    // 	  "Access-Control-Allow-Origin": "*",
-    // 	  "Content-Type": "application/json",
-    // 	},
-    //   };
+    const options = {
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
+      },
+    };
     const loginData = {
       username: username,
-      password: password,
+      password: CryptoJS.AES.encrypt(password,'INSAID@login$2022@$newweb$@').toString(),
     };
     axios
       .post("https://www.accredian.com/wp-json/jwt-auth/v1/token", loginData)
       .then((res) => {
         console.log(res.data, "auth");
-        localStorage.setItem("email", res.data.user_email);
-
+        localStorage.setItem("email", username);
+if(res.data.status == 200){
         const sendData = {
-          email: res.data.user_email,
+          email: username,
         };
         const options = {
           headers: {
@@ -120,7 +122,7 @@ if(id){
           },
         };
         axios
-          .post(`${siteUrl}/login`, sendData, options)
+          .post(`${siteUrl}/data`, sendData, options)
           .then((result) => {
             console.log(res.data, "erooll");
 
@@ -132,6 +134,7 @@ if(id){
               clearConsole();
             } else if (result.data.count == "1") {
               localStorage.setItem("enrol_id", result.data.enrol_id);
+              localStorage.setItem("user_id", result.data.user_id);
               localStorage.setItem("program_id", result.data.program_id);
               localStorage.setItem("category", result.data.category);
               localStorage.setItem("count", result.data.count);
@@ -155,7 +158,22 @@ if(id){
             console.log(err);
             LoaderClose();
           });
+        }
+        else if(res.data.status == 400){
+          toast.error("Email and Password are not matched", {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
+          LoaderClose();
+          }
       })
+    
       .catch((err) => {
         toast.error("Email and Password are not matched", {
           position: "top-right",
@@ -182,12 +200,12 @@ else{
   return (
     <>
       
-      <Box sx={{ pt: 20, pb: 6.5 }}>
+      <Box sx={{ pt:28}}>
       <ToastContainer />
         <Container fixed>
           <Box>
             <Withoutlogin />
-            <Box sx={{ my: "auto" }}>
+            <Box sx={{ alignItems:"center" }}>
               <Grid container spacing={4} justifyContent="center">
               <Backdrop
         sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
@@ -202,6 +220,7 @@ else{
                       <Typography sx={{ textAlign: "center", py: 2 }}>
                         Login
                       </Typography>
+                    
                     </Box>
                     <Box sx={{ mx: 2, py: 5 }}>
                       <form onSubmit={HandleLogin}>
@@ -260,7 +279,7 @@ else{
           </Box>
         </Container>
       </Box>
-     
+      <Footer />
     </>
   );
 }

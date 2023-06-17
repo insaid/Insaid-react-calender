@@ -44,15 +44,16 @@ const Myaccount = () => {
     setEnrooll(enrooll);
    
     axios
-      .post(`${siteUrl}/login/fetchinfo `, sendData, options)
+      .post(`${siteUrl}/data/fetchinfo `, sendData, options)
       .then((result) => {
         setData(result.data);
         console.log(result.data);
       });
   }, []);
-  const handleClickOpen = (enrol_id, category, program_id) => {
+  const handleClickOpen = (enrol_id, category, program_id,user_id) => {
     console.log(enrol_id, category);
     window.localStorage.setItem("enrol_id", enrol_id);
+    window.localStorage.setItem("user_id", user_id);
     window.localStorage.setItem("category", category);
     window.localStorage.setItem("program_id", program_id);
     navigate(`/Calendar`);
@@ -62,8 +63,8 @@ const Myaccount = () => {
     return (
       <>
         <Myaccountnav />
-        <Box sx={{ backgroundColor: "#f3f6f9", pb: 17 }}>
-          <Box sx={{ pt: 10 }}>
+        <Box sx={{ backgroundColor: "#f3f6f9", pb: 10.1 }}>
+          <Box sx={{ pt: 10 , height:520 }}>
             <Container fixed>
               <Box sx={{ mt: 5 }}>
                 <Typography sx={{ textAlign: "center", fontSize: "1.5rem" }}>
@@ -72,8 +73,8 @@ const Myaccount = () => {
               </Box>
               <Grid container rowSpacing={1} sx={{ justifyContent: "center" }}>
                 {program &&
-                  program.map(({ enrol_id, program_id, category }) => {
-                    if (program_id == "1" || program_id == "10") {
+                  program.map(({ enrol_id, program_id, category,user_id }) => {
+                    if (program_id == "1" || program_id == "10" || program_id == "29" || program_id == "33" || program_id == "40" || program_id == "41") {
                       return (
                         <Grid item lg={4} md={12} sm={12} sx={{ mx: 2 }}>
                           <center>
@@ -90,7 +91,7 @@ const Myaccount = () => {
                                 mt: 12,
                               }}
                               onClick={() =>
-                                handleClickOpen(enrol_id, category, program_id)
+                                handleClickOpen(enrol_id, category, program_id,user_id,user_id)
                               }
                             >
                               <center>
@@ -133,7 +134,7 @@ const Myaccount = () => {
                                 mt: 12,
                               }}
                               onClick={() =>
-                                handleClickOpen(enrol_id, category, program_id)
+                                handleClickOpen(enrol_id, category, program_id,user_id)
                               }
                             >
                               <center>
@@ -176,7 +177,7 @@ const Myaccount = () => {
                                 mt: 12,
                               }}
                               onClick={() =>
-                                handleClickOpen(enrol_id, category, program_id)
+                                handleClickOpen(enrol_id, category, program_id,user_id)
                               }
                             >
                               <center>
@@ -219,7 +220,7 @@ const Myaccount = () => {
                                 mt: 12,
                               }}
                               onClick={() =>
-                                handleClickOpen(enrol_id, category, program_id)
+                                handleClickOpen(enrol_id, category, program_id,user_id)
                               }
                             >
                               <center>
@@ -262,7 +263,7 @@ const Myaccount = () => {
                                 mt: 12,
                               }}
                               onClick={() =>
-                                handleClickOpen(enrol_id, category, program_id)
+                                handleClickOpen(enrol_id, category, program_id,user_id)
                               }
                             >
                               <center>
@@ -305,7 +306,7 @@ const Myaccount = () => {
                                 mt: 12,
                               }}
                               onClick={() =>
-                                handleClickOpen(enrol_id, category, program_id)
+                                handleClickOpen(enrol_id, category, program_id,user_id)
                               }
                             >
                               <center>
@@ -348,7 +349,7 @@ const Myaccount = () => {
                                 mt: 12,
                               }}
                               onClick={() =>
-                                handleClickOpen(enrol_id, category, program_id)
+                                handleClickOpen(enrol_id, category, program_id,user_id)
                               }
                             >
                               <center>
@@ -391,7 +392,7 @@ const Myaccount = () => {
                                 mt: 12,
                               }}
                               onClick={() =>
-                                handleClickOpen(enrol_id, category, program_id)
+                                handleClickOpen(enrol_id, category, program_id,user_id)
                               }
                             >
                               <center>
@@ -434,7 +435,7 @@ const Myaccount = () => {
                                 mt: 12,
                               }}
                               onClick={() =>
-                                handleClickOpen(enrol_id, category, program_id)
+                                handleClickOpen(enrol_id, category, program_id,user_id)
                               }
                             >
                               <center>
@@ -477,7 +478,7 @@ const Myaccount = () => {
                                 mt: 12,
                               }}
                               onClick={() =>
-                                handleClickOpen(enrol_id, category, program_id)
+                                handleClickOpen(enrol_id, category, program_id,user_id)
                               }
                             >
                               <center>
@@ -520,7 +521,7 @@ const Myaccount = () => {
                                 mt: 12,
                               }}
                               onClick={() =>
-                                handleClickOpen(enrol_id, category, program_id)
+                                handleClickOpen(enrol_id, category, program_id,user_id)
                               }
                             >
                               <center>
@@ -563,7 +564,7 @@ const Myaccount = () => {
                                 mt: 12,
                               }}
                               onClick={() =>
-                                handleClickOpen(enrol_id, category, program_id)
+                                handleClickOpen(enrol_id, category, program_id,user_id)
                               }
                             >
                               <center>
@@ -589,11 +590,74 @@ const Myaccount = () => {
                         </Grid>
                       );
                     }
+                    if (program_id == "38" || program_id == "39") {
+                      return (
+                        <Grid item lg={4} md={12} sm={12} sx={{ mx: 2 }}>
+                          <center>
+                            <Box
+                              sx={{
+                                boxShadow:
+                                  "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px",
+                                height: "161px",
+                                width: "200px",
+                                borderRadius: "25px",
+                                backgroundColor: "#08AEEA",
+                                backgroundImage:
+                                  "linear-gradient(0deg, #08AEEA 0%, #2AF598 100%)",
+                                mt: 12,
+                              }}
+                              onClick={() =>
+                                handleClickOpen(enrol_id, category, program_id,user_id)
+                              }
+                            >
+                              <center>
+                                {" "}
+                                <CardMedia
+                                  component="img"
+                                  image={calendarimg}
+                                  alt="green iguana"
+                                  sx={{ width: "128px", ml: 0.5 }}
+                                />
+                              </center>
+                              <Typography
+                                sx={{
+                                  textAlign: "center",
+                                  color: "#fff",
+                                  fontWeight: "bold",
+                                }}
+                              >
+                                XLRI Calendar
+                              </Typography>
+                            </Box>
+                          </center>
+                        </Grid>
+                      );
+                    }
                   })}
               </Grid>
             </Container>
           </Box>
         </Box>
+        <Box sx={{ background: "#262626",paddingRight:"0px!important",py:2,  display: { xs: "none", lg: "block" }}}>
+           
+
+               <Grid item lg={10}>
+                <Box sx={{}}>
+                    <Typography sx={{textAlign:"center",color:"#fff",mr:3}}>© 2023 ACCREDIAN. All Rights Reserved</Typography>
+                </Box>
+               </Grid>
+              
+               </Box>
+               <Box sx={{ background: "#262626",paddingRight:"0px!important",py:2,  display: { xs: "block", lg: "none" },}}>
+             
+    
+                  <Grid item xs={12}>
+                   <Box>
+                       <Typography sx={{textAlign:"center",color:"#fff",mr:3}}>© 2023 ACCREDIAN. All Rights Reserved</Typography>
+                   </Box>
+                  </Grid>
+              
+                  </Box>
       </>
     );
   }
