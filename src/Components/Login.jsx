@@ -105,7 +105,7 @@ if(id){
       password: password,
     };
     axios
-      .post("https://www.insaid.co/wp-json/jwt-auth/v1/token", loginData)
+      .post("https://www.accredian.com/wp-json/jwt-auth/v1/token", loginData)
       .then((res) => {
         console.log(res.data, "auth");
         localStorage.setItem("email", res.data.user_email);
