@@ -107,7 +107,7 @@ if(id){
       password: CryptoJS.AES.encrypt(password,'INSAID@login$2022@$newweb$@').toString(),
     };
     axios
-      .post("https://www.insaid.co/wp-json/jwt-auth/v1/token", loginData)
+      .post(`${siteUrl}/login`, JSON.stringify(loginData),options,{ withCredentials: true, })
       .then((res) => {
         console.log(res.data, "auth");
         localStorage.setItem("email", username);
