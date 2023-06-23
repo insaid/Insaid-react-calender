@@ -57,6 +57,7 @@ const Calendar = () => {
   const [eventdate, setEd] = useState();
   const [starttimeseconds, setSts] = useState();
   const [endtimeseconds, setEts] = useState();
+  const [event_id, setid] = useState();
   let navigate = useNavigate();
   const options = {
     headers: {
@@ -113,8 +114,10 @@ const Calendar = () => {
     setTimeend(moment(arg.event.end).format("hh:mm a"));
     setStatus(arg.event.extendedProps.status);
     setUrls(arg.event.url);
-    var newlink = btoa("id=" + arg.event.id + "&user_id=" + user);
-    setMylink("https://www.accredian.com/sessionlink.php?token=" + newlink);
+    setid(arg.event.id)
+   
+    // var newlink = btoa("id=" + arg.event.id + "&user_id=" + user);
+    // setMylink("https://www.accredian.com/sessionlink.php?token=" + newlink);
     setToday(moment().format("DD-MM-Y"));
     var curtime = moment().utcOffset("+05:30").format("HH:mm:ss");
     var a = curtime.split(":");
@@ -163,6 +166,28 @@ const Calendar = () => {
   const LoaderOpen = () => {
     setLoOpen(true);
   };
+
+  const handleSubmit=()=>{
+    LoaderOpen()
+    handleClose()
+    const sendData2 = {
+      user_id: user,
+      event_id:event_id
+    };
+    axios
+      .post(
+        "http://localhost:50001/calendar/capture_attendance",
+        JSON.stringify(sendData2),
+        options
+      )
+      .then((result) => {
+        LoaderClose()
+        // console.log(result,"kk")
+        window.open(result.data, '_blank');
+        setMylink(result.data)
+
+      });
+  }
   return (
     <>
       <Box sx={{ backgroundColor: "#f3f6f9", pb: 3 }}>
@@ -345,10 +370,11 @@ const Calendar = () => {
                                   href={mylink}
                                   target="_blank"
                                   underline="none"
-                                  sx={{ color: "#00802b" }}
+                                  
                                 >
                                   {" "}
-                                  Click Here to Join
+
+                                 <Typography onClick={handleSubmit} sx={{ color: "#00802b",cursor:"pointer" }}>Click Here to Join</Typography> 
                                 </Link>
                               </Typography>
                             </>
