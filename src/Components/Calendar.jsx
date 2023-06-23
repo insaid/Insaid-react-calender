@@ -35,6 +35,7 @@ import Loginnav from "./Navbar/Loginnav";
 import "./calender.css";
 import axios from "axios";
 import Footer from "./Navbar/Footer";
+import ClientConfig from "./client";
 import CircularProgress from '@mui/material/CircularProgress';
 import Swal from 'sweetalert2';
 const Calendar = () => {
@@ -59,6 +60,7 @@ const Calendar = () => {
   const [endtimeseconds, setEts] = useState();
   const [event_id, setid] = useState();
   let navigate = useNavigate();
+  const siteUrl = ClientConfig.siteUrl;
   const options = {
     headers: {
       "Access-Control-Allow-Origin": "*",
@@ -176,7 +178,7 @@ const Calendar = () => {
     };
     axios
       .post(
-        "http://localhost:50001/calendar/capture_attendance",
+        `${siteUrl}/calendar/capture_attendance`,
         JSON.stringify(sendData2),
         options
       )
